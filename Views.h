@@ -7,6 +7,7 @@ Designed by DeathSea 2014 Jnu
 #include <iostream>
 #include <string>
 #include <locale>
+#include <iterator>
 using std::string;
 class OutputText
 {
@@ -16,9 +17,9 @@ private:
 	string AdminMenu[8];
 public:
 	OutputText();
-	void Menu(int Menu_Option);
-	/*void CardID();
-	void Code();
+	unsigned int Menu(int Menu_Option);
+	void CardID();
+	/*void Code();
 	void Money();
 	void Prompt();//提示
 	void Confirm();//确认
@@ -27,12 +28,14 @@ public:
 	void AddUser();
 	void UserInfo();*/
 };
-/*class InputText
+class InputText
 {
-	void CardID();
+public:
+	int Choice(int Menu_length);
+/*	void CardID();
 	void AdminName();
 	void Code();
 	void Money();
 	void FileName();
-	void UserName();
-};*/
+	void UserName();*/
+};
