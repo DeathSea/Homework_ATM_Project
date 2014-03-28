@@ -1,0 +1,137 @@
+ATM_Project
+
+功能实现
+    面向admin
+        登陆 
+        密码修改
+        用户增加 
+        导出所有用户
+        导入所有用户
+        查询所有用户信息 
+        查询指点用户信息
+        用户存款 #需要用户密码
+        用户取款 #需要用户密码
+        用户修改密码
+    面向用户
+        存款
+        取款
+        查账
+        转账
+        修改密码
+菜单设计
+    银行ATM
+    |-输入卡号
+    |-输入密码
+        |-查询余额
+            |-显示余额
+        |-取款
+            |-输入款项#整100
+                |-提示成功
+        |-存款
+            |-输入款项#整100
+                |-提示成功
+        |-转账
+            |-输入卡号
+                |-确认转账
+                    |-提示成功
+        |-修改密码#**不允许在客户方面修改  需要后台修改
+            |-提示不允许在这修改 要到前台修改
+    银行前台
+    |-输入admin名
+    |-输入admin密码
+        |-增加用户
+            |-用户名
+            |-用户密码
+        |-导出用户（导出为文本格式）
+            |-输入文件地址
+                |-导出成功提示
+        |-导入用户（文本格式）#提交至mysql
+            |-导入提示
+                |-输入文件地址名称
+                    |-导入成功提示
+        |-查询所有用户信息
+            |-显示
+        |-查询指定用户信息
+            |-输入用户名
+                |-显示
+            |-输入卡号
+                |-显示
+        |-用户取款
+            |-转至ATM函数
+        |-用户存款
+            |-转至ATM函数
+        |-用户修改密码
+            |-输入账户号
+            |-输入原密码
+            |-两遍确认密码
+            |-提示修改成功
+程序结构
+程序内 实现的数据结构 链表 ？
+
+数据库数据结构 
+    用户表：
+        卡号   用户名   salt    sha1    卡余额
+    admin表：
+        同户名   salt    sha1
+储存：  是否用mysql？或者 sqlservice
+        使用无法调用,直接用文件储存 
+
+程序结构
+DATA#数据层
+	class OpenData#打开数据
+	    Function OpenDataFile
+	    Function LinkDataBase
+	class WriteData#数据写入
+	    Function WriteDataFile
+	    Function InsertDataBase
+	class ReadData#数据读取
+	    Function ReadDataFile
+	    Function ExecuteDataBase
+	class OperaData#数据操作
+	    Function ReadDataInfo
+	    Function QueryDataBase
+	    Function ChangDataFile
+	    Function AlterDataBase#code,username
+	class ImportData#导入数据
+	    Function ReadFile
+	class ExportData#导出数据
+	    Function WirteFile
+View#界面层
+    class OutputText
+        Function Menu(Menu_text_array,index)
+        Function CardID
+        Function Code
+        Function Money(Method)
+        Function Prompt(String)#提示
+        Function Confirm(String)#确认
+        Function ChangeCode
+        Funciton AdminName
+        Function AddUser
+        Function UserInfo
+    class InputText
+        Function Choice
+        Function CardID
+        Function AdminName
+        Function Code
+        Function Money(Method)
+        Function FileName
+        Function UserName
+Contral#控制层
+    class ATM
+        Function Login
+        Function UserBalance
+        Function Withdrawal#取款
+        Fucntion Deposit#存款
+        Function Transfer#转账
+        Function ChangeCode 
+    class Admin
+        Function Login
+        Function AddUser
+        Function EXportUser
+        Function ImportUser
+        Function InquiryAllUserInfo
+        Function InquiryNominatedUserInfo
+        Function UserWithdrawal
+        Function UserDeposit
+        Function UserTransfer
+        Function UserChangCode
