@@ -54,10 +54,10 @@ unsigned int OutputText::Menu(int Menu_Option)
 	cout.clear();
 	return array_length;
 }
-int InputText::Choice(int Menu_length)
+int InputText::Choice(int Menu_length) throw(out_of_range)
 {
-	int Choice = 0 ;
+	int Choice = 0;
 	cin >> Choice;
-	if(Choice <= Menu_length){return Choice;}
-	else{;}
+	if(Choice <= Menu_length){return Choice-1;}
+	else{throw out_of_range("选择超出范围！");}
 }

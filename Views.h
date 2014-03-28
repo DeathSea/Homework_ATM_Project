@@ -8,6 +8,7 @@ Designed by DeathSea 2014 Jnu
 #include <string>
 #include <locale>
 #include <iterator>
+#include <stdexcept>
 using std::string;
 class OutputText
 {
