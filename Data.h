@@ -5,7 +5,9 @@ Designed by DeathSea 2014 Jnu
 数据的导入导出
 */
 #include <iostream>
-using std::string;
+#include <fstream>
+//#include <stdlib.h>
+using std::string;using std::ifstream;
 struct user_info
 {
 	long CardID;
@@ -13,6 +15,7 @@ struct user_info
 	unsigned code_sha1[5];
 	//string salt;//原本想加盐的，算了，太复杂不弄了
 	long Balance;
+	bool Enable;
 	user_info * next;
 };
 struct admin_user
@@ -32,7 +35,7 @@ public:
 class OpenData
 {
 public:
-	void * OpenDataFile();//打开数据文件，返回文件指针
+	ifstream OpenDataFile();//打开数据文件，返回文件流
 	void LinkDataBase();
 };
 class WriteData
