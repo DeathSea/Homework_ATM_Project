@@ -13,3 +13,4 @@ ifstream OpenData::OpenDataFile()
 		
 	}
 }
+ofstream 
