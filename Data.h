@@ -7,7 +7,7 @@ Designed by DeathSea 2014 Jnu
 #include <iostream>
 #include <fstream>
 //#include <stdlib.h>
-using std::string;using std::ifstream;
+using std::string;using std::ifstream;using std::ofstream;
 struct user_info
 {
 	long CardID;
