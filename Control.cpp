@@ -14,7 +14,7 @@ void Start::start()
 	}
 	catch(std::out_of_range err)
 	{
-		std::cout<< err.what() << std::endl << "³ÌÐò¼´½«ÍË³ö" << std::endl;
+		std::cout<< err.what() << std::endl << "程序即将退出" << std::endl;
 		exit(1538);
 	}
     switch(Choice)

@@ -1,7 +1,7 @@
 /*
-¿ØÖÆ²ã£¨Control Layer£©
+控制层（Control Layer）
 Designed by DeathSea 2014 Jnu
-³ÌÐòÖ÷ÒªÂß¼­
+程序主要逻辑
 */
 #include <stdexcept>
 class ATM
@@ -9,9 +9,9 @@ class ATM
 public:
 	bool Login();
 //	void UserBalance();
-//	void Withdrawal();//#È¡¿î
-//	void Deposit();//#´æ¿î
-//	void Transfer();//#×ªÕË
+//	void Withdrawal();//#取款
+//	void Deposit();//#存款
+//	void Transfer();//#转账
 //	void ChangeCode(); 
 };
 class Admin

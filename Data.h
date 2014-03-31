@@ -35,19 +35,24 @@ public:
 class OpenData
 {
 public:
-	ifstream OpenDataFile();//打开数据文件，返回文件流
+	const string UserDataFileName;
+	const string AdminDataFileName;
+	ifstream OpenUserDataFile();//打开数据文件，返回文件流
+	ifstream OpenAdminDataFile();
 	void LinkDataBase();
+	OpenData():UserDataFileName("user_database.txt"),AdminDataFileName("admin_database.txt"){}
 };
 class WriteData
 {
 public:
-	void WriteDataFile();
+	void WriteDataFile(const string);
+	//void WriteDataFile((struct *)user_info);
 	void InsertDataBase();
 };
 class ReadData
 {
 public:
-	void ReadDataFile();
+	struct user_info * ReadUserDataFile(ifstream File);
 	void ExecuteDataBase();
 };
 //class OperaData
