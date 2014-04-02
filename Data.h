@@ -6,8 +6,8 @@ Designed by DeathSea 2014 Jnu
 */
 #include <iostream>
 #include <fstream>
-//#include <stdlib.h>
-using std::string;using std::ifstream;using std::ofstream;
+#include <string>
+using std::string;using std::ifstream;using std::ofstream;using std::hex;
 struct user_info
 {
 	long CardID;
@@ -27,8 +27,8 @@ struct admin_user
 class InitData//初始化数据
 {
 public:
-	user_info user_info;//以struct 类型数组实现存放
-	admin_user admin_info;
+	user_info user_HEAD;//以struct 类型数组实现存放
+	admin_user admin_HEAD;
 	InitData();
 	//~InitData();
 };
@@ -52,7 +52,8 @@ public:
 class ReadData
 {
 public:
-	struct user_info * ReadUserDataFile(ifstream File);
+	void ReadUserDataFile(ifstream File,struct user_info * p);
+	void ReadAdminDataFile(ifstream File,struct admin_user * p);
 	void ExecuteDataBase();
 };
 //class OperaData
