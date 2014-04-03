@@ -14,7 +14,7 @@ struct user_info
 	string user_name;
 	unsigned code_sha1[5];
 	//string salt;//原本想加盐的，算了，太复杂不弄了
-	long Balance;
+	float Balance;
 	bool Enable;
 	user_info * next;
 };
@@ -52,8 +52,8 @@ public:
 class ReadData
 {
 public:
-	void ReadUserDataFile(ifstream File,struct user_info * p);
-	void ReadAdminDataFile(ifstream File,struct admin_user * p);
+	void ReadUserDataFile(ifstream &File,struct user_info * p);
+	void ReadAdminDataFile(ifstream &File,struct admin_user * p);
 	void ExecuteDataBase();
 };
 //class OperaData
