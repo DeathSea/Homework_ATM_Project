@@ -42,7 +42,7 @@ void WriteData::WriteDataFile(const string FileName)
 	temp_file.close();
 }
 
-void ReadData::ReadUserDataFile(ifstream File,struct user_info * p)
+void ReadData::ReadUserDataFile(ifstream &File,struct user_info * p)
 {
 	if (File)
 	{
@@ -65,7 +65,7 @@ void ReadData::ReadUserDataFile(ifstream File,struct user_info * p)
 	}
 }
 
-void ReadData::ReadAdminDataFile(ifstream File,struct admin_user *p)
+void ReadData::ReadAdminDataFile(ifstream &File,struct admin_user *p)
 {
 	if (File)
 	{
