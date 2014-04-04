@@ -7,7 +7,7 @@ Designed by DeathSea 2014 Jnu
 #include <iostream>
 #include <fstream>
 #include <string>
-using std::string;using std::ifstream;using std::ofstream;using std::hex;
+using std::string;using std::ifstream;using std::ofstream;
 struct user_info
 {
 	long CardID;
@@ -46,14 +46,15 @@ class WriteData
 {
 public:
 	void WriteDataFile(const string);
-	//void WriteDataFile((struct *)user_info);
+	void WriteDataFile(struct admin_user *p);
+	void WriteDataFile(struct user_info *p);
 	void InsertDataBase();
 };
 class ReadData
 {
 public:
-	void ReadUserDataFile(ifstream &File,struct user_info * p);
-	void ReadAdminDataFile(ifstream &File,struct admin_user * p);
+	void ReadDataFile(ifstream &File,struct user_info * p);
+	void ReadDataFile(ifstream &File,struct admin_user * p);
 	void ExecuteDataBase();
 };
 //class OperaData

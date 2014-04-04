@@ -6,9 +6,9 @@ InitData::InitData()
 	ReadData ReadData;
 	user_HEAD.next = NULL;
 	ifstream UserDataFile = OpenData.OpenUserDataFile();
-	ReadData.ReadUserDataFile(UserDataFile,&user_HEAD);
+	ReadData.ReadDataFile(UserDataFile,&user_HEAD);
 	ifstream AdminDataFile = OpenData.OpenAdminDataFile();
-	ReadData.ReadAdminDataFile(AdminDataFile,&admin_HEAD);
+	ReadData.ReadDataFile(AdminDataFile,&admin_HEAD);
 }
 ifstream OpenData::OpenUserDataFile()
 {
@@ -42,7 +42,44 @@ void WriteData::WriteDataFile(const string FileName)
 	temp_file.close();
 }
 
-void ReadData::ReadUserDataFile(ifstream &File,struct user_info * p)
+void WriteData::WriteDataFile(struct admin_user *p)
+{
+	ofstream tp_file("admin_database.txt");
+	if(tp_file)
+	{
+		tp_file << p->Admin_name
+		<< " " << std::hex << p->code_sha1[0] 
+		<< " " << p->code_sha1[1] 
+		<< " " << p->code_sha1[2]
+		<< " " << p->code_sha1[3] 
+		<< " " << p->code_sha1[4]
+		<< std::dec
+			<< std::endl;
+	}
+}
+void WriteData::WriteDataFile(struct user_info *p)
+{
+	ofstream tp_file("user_database.txt");
+	if(tp_file)
+	{
+		while (p->next !=NULL)
+		{
+			tp_file << p->CardID
+			<< " " << p->user_name 
+			<< " " << std::hex << p->code_sha1[0] 
+			<< " " << p->code_sha1[1] 
+			<< " " << p->code_sha1[2]
+			<< " " << p->code_sha1[3] 
+			<< " " << p->code_sha1[4]
+			<< std::dec
+			<< " " << p->Balance
+			<< " " << p->Enable
+			<< std::endl;
+			p = p->next;
+		}
+	}
+}
+void ReadData::ReadDataFile(ifstream &File,struct user_info * p)
 {
 	if (File)
 	{
@@ -50,7 +87,7 @@ void ReadData::ReadUserDataFile(ifstream &File,struct user_info * p)
 		{
     		File >> p->CardID 
 			>> p->user_name 
-			>> hex >> p->code_sha1[0] 
+			>> std::hex >> p->code_sha1[0] 
 			>> p->code_sha1[1] 
 			>> p->code_sha1[2] 
 			>> p->code_sha1[3] 
@@ -65,14 +102,14 @@ void ReadData::ReadUserDataFile(ifstream &File,struct user_info * p)
 	}
 }
 
-void ReadData::ReadAdminDataFile(ifstream &File,struct admin_user *p)
+void ReadData::ReadDataFile(ifstream &File,struct admin_user *p)
 {
 	if (File)
 	{
 		if(!File.eof())
 		{
     		File >>  p->Admin_name
-			>> hex >> p->code_sha1[0] 
+			>> std::hex >> p->code_sha1[0] 
 			>> p->code_sha1[1] 
 			>> p->code_sha1[2] 
 			>> p->code_sha1[3] 

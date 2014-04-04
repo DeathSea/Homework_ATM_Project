@@ -1,5 +1,7 @@
 #include "control.h"
 #include "Views.h"
+#include "Data.h"
+InitData DDDDDData;
 void Start::start()
 {
 	OutputText OutputText;
