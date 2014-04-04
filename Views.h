@@ -20,8 +20,8 @@ public:
 	OutputText();
 	unsigned int Menu(int Menu_Option);
 	void CardID();
-	/*void Code();
-	void Money();
+	void Code();
+	/*void Money();
 	void Prompt();//提示
 	void Confirm();//确认
 	void ChangeCode();
@@ -33,10 +33,10 @@ class InputText
 {
 public:
 	int Choice(int Menu_length);
-/*	void CardID();
+	void CardID();
 	void AdminName();
 	void Code();
-	void Money();
+/*	void Money();
 	void FileName();
 	void UserName();*/
 };
