@@ -61,3 +61,38 @@ int InputText::Choice(int Menu_length) throw(out_of_range)
 	if(Choice <= Menu_length){return Choice-1;}
 	else{throw out_of_range("选择超出范围！");}
 }
+void OutputText::CardID(void)
+{
+	cout << "请输入卡号:" << endl;
+}
+void InputText::CardID(long card_id)
+{
+    cin >> card_id;
+}
+void OutputText::Code()
+{
+	cout << "请输入密码" << endl;
+}
+void InputText::Code(char * code)
+{
+	unsigned int index = 0;
+	bool get_input = true;
+	char input;
+	while(get_input)
+	{
+		input = getchar();
+		switch(input)
+		{
+		case 13:
+			get_input = false;
+			break;
+		case 8:
+			if(index > 0){index--;cout << "/b /b";}
+			break;
+		default:
+			cout <<"*";
+			code[index] = input;
+			index ++;
+		}
+	}
+}

@@ -17,18 +17,18 @@ struct user_info
 	float Balance;
 	bool Enable;
 	user_info * next;
-};
+} user_HEAD;
 struct admin_user
 {
 	string Admin_name;
 	//string salt; //同上
 	unsigned code_sha1[5];
-};
+} admin_HEAD;
 class InitData//初始化数据
 {
 public:
-	user_info user_HEAD;//以struct 类型数组实现存放
-	admin_user admin_HEAD;
+	//user_info user_HEAD;//以struct 类型数组实现存放
+	//admin_user admin_HEAD;
 	InitData();
 	//~InitData();
 };
@@ -57,14 +57,14 @@ public:
 	void ReadDataFile(ifstream &File,struct admin_user * p);
 	void ExecuteDataBase();
 };
-//class OperaData
-//{
-//public:
-//    void ReadDataInfo();
-//	void QueryDatabase();
-//	void ChangDataInfo();
-//	void AlterDataBase();
-//};
+class OperaData
+{
+public:
+    bool ReadDataInfo(long card_id,unsigned * sha1);
+	//void QueryDatabase();
+	//void ChangDataInfo(long card_id,const char);
+	//void AlterDataBase();
+};
 //class ImportData
 //{
 //private:

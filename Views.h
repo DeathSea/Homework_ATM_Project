@@ -9,6 +9,7 @@ Designed by DeathSea 2014 Jnu
 #include <locale>
 #include <iterator>
 #include <stdexcept>
+#include <conio.h>
 using std::string;
 class OutputText
 {
@@ -19,23 +20,23 @@ private:
 public:
 	OutputText();
 	unsigned int Menu(int Menu_Option);
-	void CardID();
+	void CardID(void);
 	void Code();
 	/*void Money();
 	void Prompt();//提示
 	void Confirm();//确认
-	void ChangeCode();
+	void ChangeCode();*/
 	void AdminName();
-	void AddUser();
+	/*void AddUser();
 	void UserInfo();*/
 };
 class InputText
 {
 public:
 	int Choice(int Menu_length);
-	void CardID();
+	void CardID(long card_id);
 	void AdminName();
-	void Code();
+	void Code(char * code);
 /*	void Money();
 	void FileName();
 	void UserName();*/

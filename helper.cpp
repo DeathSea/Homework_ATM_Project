@@ -15,4 +15,17 @@ bool helper::check(const char * input_char_array,unsigned *input_sha)
 			}
 		}
 	}
+	else
+	{
+		std::cerr << "Can't not produce sha1 value"<<std::endl;
+	}
+	return check_result;
+}
+void helper::calculate(const char * input_char_array,unsigned * input_sha1)
+{
+	helper::sha.Reset();
+	if(!helper::sha.Result(input_sha1))
+	{
+		std::cerr<<"Can't not calculate the sha1 value"<<std::endl;
+	}
 }

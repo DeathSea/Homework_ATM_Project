@@ -4,8 +4,14 @@ Designed by DeathSea 2014 Jnu
 程序主要逻辑
 */
 #include <stdexcept>
+#include "Views.h"
+#include "Data.h"
 class ATM
-{     
+{
+private:
+	OutputText OutputText;
+	InputText  InputText;
+	OperaData  OperaData;
 public:
 	bool Login();
 //	void UserBalance();

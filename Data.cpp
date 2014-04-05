@@ -118,3 +118,21 @@ void ReadData::ReadDataFile(ifstream &File,struct admin_user *p)
 		File.close();
 	}
 }
+bool OperaData::ReadDataInfo(long card_id,unsigned * sha1)
+{
+	struct user_info *p;
+	p = &user_HEAD;
+	while(p->next != NULL)
+	{
+		if (p->CardID == card_id)
+		{
+			sha1[0] = p->code_sha1[0];
+			sha1[1] = p->code_sha1[1];
+			sha1[2] = p->code_sha1[2];
+			sha1[3] = p->code_sha1[3];
+			sha1[4] = p->code_sha1[4];
+			return true;
+		}
+	}
+	return false;
+}
