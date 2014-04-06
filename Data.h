@@ -4,26 +4,13 @@ Designed by DeathSea 2014 Jnu
 提供数据初始化与操作
 数据的导入导出
 */
+#ifndef DATA_HEAD
+#define DATA_HEAD
 #include <iostream>
 #include <fstream>
 #include <string>
 using std::string;using std::ifstream;using std::ofstream;
-struct user_info
-{
-	long CardID;
-	string user_name;
-	unsigned code_sha1[5];
-	//string salt;//原本想加盐的，算了，太复杂不弄了
-	float Balance;
-	bool Enable;
-	user_info * next;
-} user_HEAD;
-struct admin_user
-{
-	string Admin_name;
-	//string salt; //同上
-	unsigned code_sha1[5];
-} admin_HEAD;
+
 class InitData//初始化数据
 {
 public:
@@ -75,3 +62,4 @@ public:
 //private:
 //	void WirteData();
 //};
+#endif
