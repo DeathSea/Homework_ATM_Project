@@ -1,5 +1,21 @@
 #include "Data.h"
 #include "sha1.h"
+struct user_info
+{
+	long CardID;
+	string user_name;
+	unsigned code_sha1[5];
+	//string salt;//原本想加盐的，算了，太复杂不弄了
+	float Balance;
+	bool Enable;
+	user_info * next;
+} user_HEAD;
+struct admin_user
+{
+	string Admin_name;
+	//string salt; //同上
+	unsigned code_sha1[5];
+} admin_HEAD;
 InitData::InitData()
 {
 	OpenData OpenData;
