@@ -3,6 +3,9 @@
 Designed by DeathSea 2014 Jnu
 程序主要逻辑
 */
+
+#ifndef CONTROL_HEAD
+#define CONTROL_HEAD
 #include <stdexcept>
 #include "Views.h"
 #include "Data.h"
@@ -40,3 +43,4 @@ public:
 	void start();
 //	void show_menu();
 };
+#endif
