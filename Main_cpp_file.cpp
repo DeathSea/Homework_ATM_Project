@@ -1,7 +1,7 @@
 //#include <iostream>
 #include "Control.h"
 //#include "Data.h"
-#include "Views.h"
+//#include "Views.h"
 //using namespace std;
 int main(void)
 {
