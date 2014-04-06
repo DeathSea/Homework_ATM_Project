@@ -4,6 +4,8 @@
 Designed by DeathSea 2014 Jnu
 提供文本界面的输入与输出
 */
+#ifndef VIEW_HEAD
+#define VIEW_HEAD
 #include <iostream>
 #include <string>
 #include <locale>
@@ -34,10 +36,11 @@ class InputText
 {
 public:
 	int Choice(int Menu_length);
-	void CardID(long card_id);
+	void CardID(long * card_id);
 	void AdminName();
 	void Code(char * code);
 /*	void Money();
 	void FileName();
 	void UserName();*/
 };
+#endif
