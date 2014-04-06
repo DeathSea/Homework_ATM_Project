@@ -54,7 +54,7 @@ unsigned int OutputText::Menu(int Menu_Option)
 	cout.clear();
 	return array_length;
 }
-int InputText::Choice(int Menu_length) throw(out_of_range)
+int InputText::Choice(int Menu_length)// throw(out_of_range)
 {
 	int Choice = 0;
 	cin >> Choice;
@@ -65,9 +65,9 @@ void OutputText::CardID(void)
 {
 	cout << "请输入卡号:" << endl;
 }
-void InputText::CardID(long card_id)
+void InputText::CardID(long * card_id)
 {
-    cin >> card_id;
+    cin >> *card_id;
 }
 void OutputText::Code()
 {
@@ -80,19 +80,22 @@ void InputText::Code(char * code)
 	char input;
 	while(get_input)
 	{
-		input = getchar();
+		input = _getch();
 		switch(input)
 		{
 		case 13:
 			get_input = false;
 			break;
 		case 8:
-			if(index > 0){index--;cout << "/b /b";}
+			if(index > 0){index--;cout << "\b \b";}
+			break;
+		case 10:
 			break;
 		default:
-			cout <<"*";
+			_putch('*');
 			code[index] = input;
 			index ++;
 		}
 	}
+	cout << endl;
 }
