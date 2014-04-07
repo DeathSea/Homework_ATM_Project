@@ -1,5 +1,5 @@
 #include "helper.h"
-bool helper::check(const char * input_char_array,unsigned *input_sha)
+bool helper::check(const char * input_char_array,unsigned *input_sha)//检查传入值的sha1值与传入的sha1值是否相同
 {
 	helper::sha.Reset();
 	unsigned output_sha[5];
