@@ -2,7 +2,7 @@
 #include "helper.h"
 void Start::start()
 {
-	InitData DDDDDDATA;//fucking to init the data
+	InitData DDDDDDATA;
 	OutputText OutputText;
 	InputText  InputText;
 	ATM ATM;
@@ -20,7 +20,7 @@ void Start::start()
 		std::cout<< err.what() << std::endl << "程序即将退出" << std::endl;
 		exit(1538);
 	}
-    switch(Choice)
+	switch(Choice)
 	{
 	case (0):
 		login = ATM.Login();
@@ -37,27 +37,33 @@ bool ATM::Login(void)
 {
 	long card_id;
 	char code[255] = {'\0'};
-	unsigned database_sha1[5];
+	unsigned database_sha1[5],try_time = 1;
 	helper helper;
 	OutputText.CardID();
 	InputText.CardID(&card_id);
 	OutputText.Code();
 	InputText.Code(code);
-    if(!OperaData.ReadDataInfo(card_id,database_sha1))
+	if(!OperaData.ReadDataInfo(card_id,database_sha1))
 	{
-		std::cout << "Can't find the card id in the database ,Please check again"<<std::endl;
-		return true;
+		std::cout << "卡号未找到，请检查一遍"<<std::endl;
+		return false;
 	}
 	else
 	{
-	   if(helper.check(code,database_sha1))
-	   {
-		   return true;
-	   }
-	   else
-	   {
-		   std::cout << "code error"<<std::endl;
-		   return false;
-	   }
+		while(!helper.check(code,database_sha1))
+		{
+			std::cout << "密码错误"<<std::endl;
+			OutputText.Code();
+			InputText.Code(code);
+			try_time ++;
+			if (try_time==3)
+			{
+				std::cout << "尝试次数超过三次，账号已锁定，到后台解决吧少年！"<< std::endl;
+				//账号锁定
+				return false;
+				break;
+			}
+		}
+		return true;
 	}
 }
