@@ -9,12 +9,19 @@ Designed by DeathSea 2014 Jnu
 #include <stdexcept>
 #include "Views.h"
 #include "Data.h"
+class Start
+{
+public:
+	void start();
+//	void show_menu();
+};
 class ATM
 {
 private:
 	OutputText OutputText;
 	InputText  InputText;
 	OperaData  OperaData;
+	Start Start;
 public:
 	bool Login();
 //	void UserBalance();
@@ -27,6 +34,9 @@ class Admin
 {        
 public:
 	bool Login();
+	OutputText OutputText;
+	InputText  InputText;
+	OperaData  OperaData;
 //	void AddUser();
 //	void EXportUser();
 //	void ImportUser();
@@ -36,11 +46,5 @@ public:
 //	void UserDeposit();
 //	void UserTransfer();
 //	void UserChangCode();
-};
-class Start
-{
-public:
-	void start();
-//	void show_menu();
 };
 #endif
