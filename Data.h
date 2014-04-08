@@ -48,6 +48,7 @@ class OperaData
 {
 public:
     bool ReadDataInfo(long card_id,unsigned * sha1);
+	bool ReadDataInfo(string admin_name,unsigned * sha1);
 	//void QueryDatabase();
 	//void ChangDataInfo(long card_id,const char);
 	//void AlterDataBase();
