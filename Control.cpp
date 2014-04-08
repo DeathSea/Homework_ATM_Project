@@ -1,11 +1,11 @@
 #include "control.h"
 #include "helper.h"
+
 void Start::start()
 {
-	InitData DDDDDDATA;
 	OutputText OutputText;
 	InputText  InputText;
-	ATM ATM;
+	ATM ATM;Admin Admin;
 	enum Menu {MainMenu,ATMMenu,AdminMenu};
 	unsigned int Menu_length = 0;
 	unsigned int Choice      = 0;
@@ -28,6 +28,7 @@ void Start::start()
 			Menu_length = OutputText.Menu(ATMMenu);}
 		break;
 	case(1):
+		login = Admin.Login();
 		OutputText.Menu(AdminMenu);
 		break;
 	}
@@ -37,33 +38,82 @@ bool ATM::Login(void)
 {
 	long card_id;
 	char code[255] = {'\0'};
-	unsigned database_sha1[5],try_time = 1;
+	unsigned database_sha1[5],try_time = 0;
 	helper helper;
 	OutputText.CardID();
 	InputText.CardID(&card_id);
+	while(!OperaData.ReadDataInfo(card_id,database_sha1))
+	{
+		OutputText.Prompt("卡号未找到，请检查一遍");
+		try_time++;
+	    OutputText.CardID();
+	    InputText.CardID(&card_id);
+		if(try_time == 3)
+		{
+			OutputText.Prompt("尝试次数超过三次！");
+			Start.start();
+			return false;
+			break;
+		}
+	}
+	try_time = 0;
 	OutputText.Code();
 	InputText.Code(code);
-	if(!OperaData.ReadDataInfo(card_id,database_sha1))
+	while(!helper.check(code,database_sha1))
 	{
-		std::cout << "卡号未找到，请检查一遍"<<std::endl;
-		return false;
-	}
-	else
-	{
-		while(!helper.check(code,database_sha1))
+		OutputText.Prompt("密码错误");
+		try_time ++;
+		OutputText.Code();
+		InputText.Code(code);
+		if (try_time==3)
 		{
-			std::cout << "密码错误"<<std::endl;
-			OutputText.Code();
-			InputText.Code(code);
-			try_time ++;
-			if (try_time==3)
-			{
-				std::cout << "尝试次数超过三次，账号已锁定，到后台解决吧少年！"<< std::endl;
-				//账号锁定
-				return false;
-				break;
-			}
+			OutputText.Prompt("尝试次数超过三次，账号已锁定，到后台解决吧少年！");
+			//账号锁定
+			Start.start();
+			return false;
+			break;
 		}
-		return true;
 	}
+		return true;
+}
+bool Admin::Login(void)
+{
+	string name;
+	char code[255] = {'\0'};
+	unsigned database_sha1[5],try_time = 0;
+	helper helper;
+	OutputText.AdminName();
+	InputText.AdminName(&name);
+	while(!OperaData.ReadDataInfo(name,database_sha1))
+	{
+		OutputText.Prompt("用户名错误");
+		try_time ++;
+		OutputText.AdminName();
+		InputText.AdminName(&name);
+		if(try_time == 3)
+		{
+			OutputText.Prompt("输入三次错误！程序即将退出");
+			exit(5921);
+			return false;
+			break;
+		}
+	}
+	try_time = 0;
+	OutputText.Code();
+	InputText.Code(code);
+	while(!helper.check(code,database_sha1))
+	{
+		OutputText.Prompt("密码错误！");
+		try_time++;
+		OutputText.Code();
+		InputText.Code(code);
+		if (try_time==3)
+		{
+			OutputText.Prompt("密码输入三次错误！，程序即将退出");
+			exit(5923);
+			return false;
+			break;
+		}
+	}
+	return true;
 }
