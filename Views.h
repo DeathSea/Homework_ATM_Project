@@ -24,10 +24,10 @@ public:
 	unsigned int Menu(int Menu_Option);
 	void CardID(void);
 	void Code();
-	/*void Money();
-	void Prompt();//提示
+	/*void Money();*/
+	void Prompt(const string pro);//提示
 	void Confirm();//确认
-	void ChangeCode();*/
+	/*void ChangeCode();*/
 	void AdminName();
 	/*void AddUser();
 	void UserInfo();*/
@@ -37,7 +37,7 @@ class InputText
 public:
 	int Choice(int Menu_length);
 	void CardID(long * card_id);
-	void AdminName();
+	void AdminName(string * in);
 	void Code(char * code);
 /*	void Money();
 	void FileName();
