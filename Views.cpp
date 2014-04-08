@@ -63,7 +63,7 @@ int InputText::Choice(int Menu_length)// throw(out_of_range)
 }
 void OutputText::CardID(void)
 {
-	cout << "请输入卡号:" << endl;
+	OutputText::Prompt("请输入卡号:");
 }
 void InputText::CardID(long * card_id)
 {
@@ -71,7 +71,7 @@ void InputText::CardID(long * card_id)
 }
 void OutputText::Code()
 {
-	cout << "请输入密码" << endl;
+	OutputText::Prompt("请输入密码:");
 }
 void InputText::Code(char * code)
 {
@@ -98,4 +98,16 @@ void InputText::Code(char * code)
 		}
 	}
 	cout << endl;
+}
+void OutputText::Prompt(const string pro)
+{
+	cout << pro << endl;
+}
+void OutputText::AdminName(void)
+{
+	OutputText::Prompt("请输入后台用户名");
+}
+void InputText::AdminName(string * in)
+{
+	cin >> *in;
 }
