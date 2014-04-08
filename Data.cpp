@@ -152,3 +152,18 @@ bool OperaData::ReadDataInfo(long card_id,unsigned * sha1)
 	}
 	return false;
 }
+bool OperaData::ReadDataInfo(string admin_name,unsigned * sha1)
+{
+	struct admin_user * p;
+	p = &admin_HEAD;
+	if(p->Admin_name == admin_name)
+	{
+		sha1[0] = p->code_sha1[0];
+		sha1[1] = p->code_sha1[0];
+		sha1[2] = p->code_sha1[0];
+		sha1[3] = p->code_sha1[0];
+		sha1[4] = p->code_sha1[0];
+		return true;
+	}
+	return false;
+}
