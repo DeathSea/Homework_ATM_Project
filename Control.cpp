@@ -24,12 +24,17 @@ void Start::start()
 	{
 	case (0):
 		login = ATM.Login();
-		if(login){
-			Menu_length = OutputText.Menu(ATMMenu);}
+		if(login)
+		{
+			Menu_length = OutputText.Menu(ATMMenu);
+		}
 		break;
 	case(1):
 		login = Admin.Login();
-		OutputText.Menu(AdminMenu);
+		if(login)
+		{
+			Menu_length = OutputText.Menu(AdminMenu);
+		}
 		break;
 	}
 
@@ -56,6 +61,7 @@ bool ATM::Login(void)
 			break;
 		}
 	}
+	if(!OperaData.ReadDataInfo(card_id)){OutputText.Prompt("账号已锁定，请联系管理员");return false;}
 	try_time = 0;
 	OutputText.Code();
 	InputText.Code(code);
