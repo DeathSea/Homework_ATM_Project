@@ -17,7 +17,7 @@ public:
 	//user_info user_HEAD;//以struct 类型数组实现存放
 	//admin_user admin_HEAD;
 	InitData();
-	//~InitData();
+	~InitData();
 };
 class OpenData
 {
