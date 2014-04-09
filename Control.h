@@ -24,11 +24,11 @@ private:
 	Start Start;
 public:
 	bool Login();
-//	void UserBalance();
-//	void Withdrawal();//#取款
-//	void Deposit();//#存款
-//	void Transfer();//#转账
-//	void ChangeCode(); 
+	void UserBalance();
+	void Withdrawal();//#取款
+	void Deposit();//#存款
+	void Transfer();//#转账
+	void ChangeCode(); 
 };
 class Admin
 {        
@@ -37,14 +37,14 @@ public:
 	OutputText OutputText;
 	InputText  InputText;
 	OperaData  OperaData;
-//	void AddUser();
-//	void EXportUser();
-//	void ImportUser();
-//	void InquiryAllUserInfo();
-//	void InquiryNominatedUserInfo();
-//	void UserWithdrawal();
-//	void UserDeposit();
-//	void UserTransfer();
-//	void UserChangCode();
+	void AddUser();
+	void EXportUser();
+	void ImportUser();
+	void InquiryAllUserInfo();
+	void InquiryNominatedUserInfo();
+	void UserWithdrawal();
+	void UserDeposit();
+	void UserTransfer();
+	void UserChangCode();
 };
 #endif
