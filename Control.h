@@ -11,9 +11,12 @@ Designed by DeathSea 2014 Jnu
 #include "Data.h"
 class Start
 {
+private:
+	OutputText OutputText;
+	InputText  InputText;
 public:
 	void start();
-//	void show_menu();
+	unsigned make_choice(unsigned Menu_option);
 };
 class ATM
 {
