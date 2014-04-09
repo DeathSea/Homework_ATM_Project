@@ -3,41 +3,26 @@
 
 void Start::start()
 {
-	OutputText OutputText;
-	InputText  InputText;
 	ATM ATM;Admin Admin;
 	enum Menu {MainMenu,ATMMenu,AdminMenu};
 	unsigned int Menu_length = 0;
 	unsigned int Choice      = 0;
-	bool login=false;
-	Menu_length = OutputText.Menu(MainMenu);
-	try
-	{
-		Choice      = InputText.Choice(Menu_length);
-	}
-	catch(std::out_of_range err)
-	{
-		std::cout<< err.what() << std::endl << "程序即将退出" << std::endl;
-		exit(1538);
-	}
+	bool login=false,ATM_login = false,admin_login = false;
+	Choice = Start::make_choice(MainMenu);
 	switch(Choice)
 	{
 	case (0):
-		login = ATM.Login();
-		if(login)
-		{
-			Menu_length = OutputText.Menu(ATMMenu);
-		}
+		ATM_login = ATM.Login();
 		break;
 	case(1):
-		login = Admin.Login();
-		if(login)
-		{
-			Menu_length = OutputText.Menu(AdminMenu);
-		}
+		admin_login = Admin.Login();
 		break;
+	default:
+		OutputText.Prompt("未知选项！");
+		exit(1365);
 	}
-
+	if(ATM_login){Choice = Start::make_choice(ATMMenu);}
+	if(admin_login){Choice = Start::make_choice(AdminMenu);}
 }
 bool ATM::Login(void)
 {
@@ -53,7 +38,7 @@ bool ATM::Login(void)
 		try_time++;
 	    OutputText.CardID();
 	    InputText.CardID(&card_id);
-		if(try_time == 3)
+		if(try_time == 2)
 		{
 			OutputText.Prompt("尝试次数超过三次！");
 			Start.start();
@@ -71,10 +56,10 @@ bool ATM::Login(void)
 		try_time ++;
 		OutputText.Code();
 		InputText.Code(code);
-		if (try_time==3)
+		if (try_time==2)
 		{
 			OutputText.Prompt("尝试次数超过三次，账号已锁定，到后台解决吧少年！");
-			//账号锁定
+			OperaData.ChangDataInfo(card_id,false);//账号锁定
 			Start.start();
 			return false;
 			break;
@@ -96,7 +81,7 @@ bool Admin::Login(void)
 		try_time ++;
 		OutputText.AdminName();
 		InputText.AdminName(&name);
-		if(try_time == 3)
+		if(try_time == 2)
 		{
 			OutputText.Prompt("输入三次错误！程序即将退出");
 			exit(5921);
@@ -113,7 +98,7 @@ bool Admin::Login(void)
 		try_time++;
 		OutputText.Code();
 		InputText.Code(code);
-		if (try_time==3)
+		if (try_time==2)
 		{
 			OutputText.Prompt("密码输入三次错误！，程序即将退出");
 			exit(5923);
@@ -122,4 +107,20 @@ bool Admin::Login(void)
 		}
 	}
 	return true;
+}
+unsigned Start::make_choice(unsigned Menu)
+{
+	unsigned int Menu_length = 0;
+	unsigned int Choice      = 0;
+	Menu_length = OutputText.Menu(Menu);
+	try
+	{
+		Choice      = InputText.Choice(Menu_length);
+	}
+	catch(std::out_of_range err)
+	{
+		std::cout<< err.what() << std::endl << "程序即将退出" << std::endl;
+		exit(1538);
+	}
+	return Choice;
 }
