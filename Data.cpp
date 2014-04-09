@@ -26,6 +26,12 @@ InitData::InitData()
 	ifstream AdminDataFile = OpenData.OpenAdminDataFile();
 	ReadData.ReadDataFile(AdminDataFile,&admin_HEAD);
 }
+InitData::~InitData()
+{
+	WriteData WriteData;
+	WriteData.WriteDataFile(&admin_HEAD);
+	WriteData.WriteDataFile(&user_HEAD);
+}
 ifstream OpenData::OpenUserDataFile()
 {
 	WriteData WriteData;
@@ -78,7 +84,7 @@ void WriteData::WriteDataFile(struct user_info *p)
 	ofstream tp_file("user_database.txt");
 	if(tp_file)
 	{
-		while (p->next !=NULL)
+		while (p->next->next !=NULL)
 		{
 			tp_file << p->CardID
 			<< " " << p->user_name 
@@ -167,4 +173,30 @@ bool OperaData::ReadDataInfo(string admin_name,unsigned * sha1)
 		return true;
 	}
 	return false;
+}
+bool OperaData::ReadDataInfo(long card_id)
+{
+	struct user_info *p;
+	p = &user_HEAD;
+	while(p->next != NULL)
+	{
+		if (p->CardID == card_id)
+		{
+			return p->Enable;
+		}
+		p = p->next;
+	}
+}
+void OperaData::ChangDataInfo(long card_id,bool enable)
+{
+	struct user_info *p;
+	p = &user_HEAD;
+	while(p->next != NULL)
+	{
+		if (p->CardID == card_id)
+		{
+			p->Enable = enable;
+		}
+		p = p->next;
+	}
 }
