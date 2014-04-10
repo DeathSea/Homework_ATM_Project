@@ -26,6 +26,7 @@ public:
 	void Code();//打印输入密码的提示
 	void Money();//打印输入钱数的提示
 	void Prompt(const string pro);//提示
+	void Prompt(float);
 	void Confirm();//确认
 	void ChangeCode();//打印修改密码的提示
 	void AdminName();//打印输入admin名的信息

@@ -26,8 +26,8 @@ private:
 	OperaData  OperaData;
 	Start Start;
 public:
-	bool Login();
-	void UserBalance();
+	bool Login(long &card_id);
+	void UserBalance(long id);//查询余额
 	void Withdrawal();//#取款
 	void Deposit();//#存款
 	void Transfer();//#转账

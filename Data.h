@@ -50,6 +50,7 @@ public:
     bool ReadDataInfo(long card_id,unsigned * sha1);//读取用户密码的sha1值
 	bool ReadDataInfo(string admin_name,unsigned * sha1);//读取admin密码的sha1值
 	bool ReadDataInfo(long card_id);//读取用户是否锁定
+	void ReadDataInfo(const long &id,float &balance);
 	//void QueryDatabase();
 	void ChangDataInfo(long card_id,bool enable);//使用户账户禁用/可用
 	//void AlterDataBase();
