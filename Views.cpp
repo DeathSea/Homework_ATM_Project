@@ -23,7 +23,7 @@ OutputText::OutputText()
 }
 unsigned int OutputText::Menu(int Menu_Option)
 {
-	cout << "********************************" << endl;
+	OutputText.Prompt("********************************");
 	string * Menu = NULL;
 	unsigned int array_length = 0;
 	switch(Menu_Option)
@@ -41,7 +41,7 @@ unsigned int OutputText::Menu(int Menu_Option)
 		break;
 	}
 	if(Menu != NULL){array_length = end(*Menu) - begin(*Menu)-1;}
-	else{cout << "程序运行发生了一个问题位于Views.cpp" << endl;return 0;}
+	else{OutputText.Prompt("程序运行发生了一个问题位于Views.cpp");return 9068;}
 	for(int index=0;index != array_length;index++)
 	{
 		string cmend(19-((*(Menu+index)).size()),' ');
@@ -49,7 +49,7 @@ unsigned int OutputText::Menu(int Menu_Option)
 		cout << *(Menu+index) << cmend << "*";
 		cout << endl;
 	}
-	cout << "********************************" << endl;
+	OutputText.Prompt("********************************");
 	cout << "请输入你的选择(1至" << array_length << "):";
 	cout.clear();
 	return array_length;
@@ -102,6 +102,10 @@ void InputText::Code(char * code)
 void OutputText::Prompt(const string pro)
 {
 	cout << pro << endl;
+}
+void OutputText::Prompt(float o)
+{
+	cout << o << endl;
 }
 void OutputText::AdminName(void)
 {
