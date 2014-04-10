@@ -21,6 +21,14 @@ OutputText::OutputText()
 	AdminMenu[6] = "用户存款";
 	AdminMenu[7] = "用户修改密码";
 }
+void OutputText::Prompt(const string pro)
+{
+	cout << pro << endl;
+}
+void OutputText::Prompt(float o)
+{
+	cout << o << endl;
+}
 unsigned int OutputText::Menu(int Menu_Option)
 {
 	OutputText.Prompt("********************************");
@@ -98,14 +106,6 @@ void InputText::Code(char * code)
 		}
 	}
 	cout << endl;
-}
-void OutputText::Prompt(const string pro)
-{
-	cout << pro << endl;
-}
-void OutputText::Prompt(float o)
-{
-	cout << o << endl;
 }
 void OutputText::AdminName(void)
 {
