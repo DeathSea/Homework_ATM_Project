@@ -200,3 +200,16 @@ void OperaData::ChangDataInfo(long card_id,bool enable)
 		p = p->next;
 	}
 }
+void OperaData::ReadDataInfo(const long &id,float &balance)
+{
+	struct user_info *p;
+	p = &user_HEAD;
+	while(p->next != NULL)
+	{
+		if (p->CardID == id)
+		{
+			balance = p->Balance;
+		}
+		p = p->next;
+	}
+}
