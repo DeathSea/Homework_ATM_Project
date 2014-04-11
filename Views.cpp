@@ -5,12 +5,14 @@ OutputText::OutputText()
 	//主菜单初始化
 	MainMenu[0]  = "ATM";
 	MainMenu[1]  = "前台";
+	MainMenu[2]  = "退出";
 	//ATM菜单初始化
 	ATMMenu[0]   = "查询余额";
 	ATMMenu[1]   = "取款";
 	ATMMenu[2]   = "存款";
 	ATMMenu[3]   = "转账";
 	ATMMenu[4]   = "修改密码";
+	ATMMenu[5]   = "退出";
 	//前台菜单初始化
 	AdminMenu[0] = "增加用户";
 	AdminMenu[1] = "导出用户";
@@ -20,6 +22,7 @@ OutputText::OutputText()
 	AdminMenu[5] = "用户取款";
 	AdminMenu[6] = "用户存款";
 	AdminMenu[7] = "用户修改密码";
+	AdminMenu[8] = "退出";
 }
 void OutputText::Prompt(const string pro)
 {
@@ -31,25 +34,27 @@ void OutputText::Prompt(float o)
 }
 unsigned int OutputText::Menu(int Menu_Option)
 {
-	OutputText.Prompt("********************************");
+	OutputText::Prompt("********************************");
 	string * Menu = NULL;
 	unsigned int array_length = 0;
 	switch(Menu_Option)
 	{
 	case(0):
 		Menu = MainMenu;
+		array_length = 3;
 		break;
 	case(1):
 		Menu = ATMMenu;
+		array_length = 6;
 		break;
 	case(2):
 		Menu = AdminMenu;
+		array_length = 9;
 		break;
 	default:
 		break;
 	}
-	if(Menu != NULL){array_length = end(*Menu) - begin(*Menu)-1;}
-	else{OutputText.Prompt("程序运行发生了一个问题位于Views.cpp");return 9068;}
+	if(Menu == NULL){OutputText::Prompt("程序运行发生了一个问题位于Views.cpp");return 9068;}
 	for(int index=0;index != array_length;index++)
 	{
 		string cmend(19-((*(Menu+index)).size()),' ');
@@ -57,7 +62,7 @@ unsigned int OutputText::Menu(int Menu_Option)
 		cout << *(Menu+index) << cmend << "*";
 		cout << endl;
 	}
-	OutputText.Prompt("********************************");
+	OutputText::Prompt("********************************");
 	cout << "请输入你的选择(1至" << array_length << "):";
 	cout.clear();
 	return array_length;
@@ -114,4 +119,41 @@ void OutputText::AdminName(void)
 void InputText::AdminName(string * in)
 {
 	cin >> *in;
+}
+bool InputText::Confirm()
+{
+	char in = '\0';
+	cin >> in;
+	switch(in)
+	{
+	case 'Y':case 'y':
+		return true;
+	case 'N':case 'n':
+		return false;
+	default:
+		cout << "未知选项" << endl;
+		exit(1365);
+	}
+}
+void OutputText::Confirm(const string O)
+{
+	cout << "你确定要" << O << "吗？(Y/N)" << endl;
+}
+void OutputText::Money()
+{
+	OutputText::Prompt("请输入多少人民币（整百）：");
+}
+void InputText::Money(int &input)
+{
+	int tmp;
+	cin >> tmp;
+	if(tmp > 0)
+	{
+		if(tmp % 100 == 0)
+		{
+		    input = tmp;
+		}
+		else{throw runtime_error("请输入整百数！");}
+	}
+	else{throw runtime_error("请输入正数!");}
 }
