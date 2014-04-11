@@ -6,7 +6,7 @@ void Start::start()
 	ATM ATM;Admin Admin;
 	enum Menu {MainMenu,ATMMenu,AdminMenu};
 	unsigned int Menu_length = 0;
-	unsigned int Choice      = 0;
+	unsigned int Choice = 0;
 	bool login=false,ATM_login = false,admin_login = false;
 	long id = -1;
 	Choice = Start::make_choice(MainMenu);
@@ -18,34 +18,49 @@ void Start::start()
 	case(1):
 		admin_login = Admin.Login();
 		break;
+	case(2):
+		exit(0);
 	default:
 		OutputText.Prompt("未知选项！");
 		exit(1365);
 	}
 	if(ATM_login)
 	{
-		Choice = Start::make_choice(ATMMenu);
-		switch(Choice)
-		{
-		case(0):
-			ATM.UserBalance(id);
-			break;
-		case(1):
-			break;
-		case(2):
-			break;
-		case(3):
-			break;
-		case(4):
-			break;
-		default:
-		    OutputText.Prompt("未知选项！");
-		    exit(1365);
-		}
+		Start::ATM_choice(id);
 	}
 	if(admin_login)
 	{
 		Choice = Start::make_choice(AdminMenu);
+	}
+}
+void Start::ATM_choice(long &id)
+{
+	ATM ATM;
+	unsigned int Choice      = 0;
+	Choice = Start::make_choice(1);
+	switch(Choice)
+	{
+	case(0):
+		ATM.UserBalance(id);
+		Start::ATM_choice(id);
+		break;
+	case(1):
+		ATM.Withdrawal(id);
+		Start::ATM_choice(id);
+		break;
+	case(2):
+		ATM.Deposit(id);
+		Start::ATM_choice(id);
+		break;
+	case(3):
+		break;
+	case(4):
+		break;
+	case(5):
+		exit(0);
+	default:
+		OutputText.Prompt("未知选项！");
+		exit(1365);
 	}
 }
 bool ATM::Login(long &id)
@@ -149,10 +164,53 @@ unsigned Start::make_choice(unsigned Menu)
 	}
 	return Choice;
 }
-void ATM::UserBalance(long id)
+void ATM::UserBalance(long &id)
 {
 	float balance = 0;
 	OperaData.ReadDataInfo(id,balance);
 	OutputText.Prompt("你的余额为:");
 	OutputText.Prompt(balance);
+}
+void ATM::Withdrawal(long &id)
+{
+	OutputText.Confirm("取款");
+	bool Yes_or_No = InputText.Confirm();
+	int money = 0;float balance = 0;
+	if (!Yes_or_No){return ;}
+	else
+	{
+		OutputText.Money();
+		try
+		{
+			InputText.Money(money);
+			OperaData.ReadDataInfo(id,balance);
+		}
+		catch(std::runtime_error err)
+		{
+			std::cout << err.what() << std::endl;
+			return;
+		}
+		if(balance > money)
+		{
+			OperaData.ChangDataInfo(id,money,0);
+			std::cout<<"这是你的"<<money<<"元整，请拿好"<<std::endl;
+		}
+		else{OutputText.Prompt("余额不足！");}
+	}
+}
+void ATM::Deposit(long &id)
+{
+	int money = 0;
+	OutputText.Money();
+	try
+	{
+		InputText.Money(money);
+	}
+	catch(std::runtime_error err)
+	{
+		std::cout << err.what() << std::endl;
+		return;
+	}
+	OperaData.ChangDataInfo(id,money,1);
+	std::cout<<"已存入"<<money<<"元整"<<std::endl;
 }
