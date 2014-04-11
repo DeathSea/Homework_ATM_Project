@@ -17,6 +17,7 @@ private:
 public:
 	void start();
 	unsigned make_choice(unsigned Menu_option);
+	void ATM_choice(long &);
 };
 class ATM
 {
@@ -27,19 +28,20 @@ private:
 	Start Start;
 public:
 	bool Login(long &card_id);
-	void UserBalance(long id);//查询余额
-	void Withdrawal();//#取款
-	void Deposit();//#存款
+	void UserBalance(long &id);//查询余额
+	void Withdrawal(long &id);//#取款
+	void Deposit(long &id);//#存款
 	void Transfer();//#转账
 	void ChangeCode(); 
 };
 class Admin
 {        
-public:
-	bool Login();
+private:
 	OutputText OutputText;
 	InputText  InputText;
 	OperaData  OperaData;
+public:
+	bool Login();
 	void AddUser();
 	void EXportUser();
 	void ImportUser();
