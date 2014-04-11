@@ -199,6 +199,35 @@ void OperaData::ChangDataInfo(long card_id,bool enable)
 		}
 		p = p->next;
 	}
+	WD.WriteDataFile(&user_HEAD);
+}
+void OperaData::ChangDataInfo(long &id,int money,bool I_or_O)
+{
+	struct user_info *p;
+	p = &user_HEAD;
+	if(I_or_O == false)
+	{
+		while(p->next != NULL)
+		{
+			if (p->CardID == id)
+			{
+				p->Balance -= money;
+			}
+			p = p->next;
+		}
+	}
+	else
+	{
+		while(p->next != NULL)
+		{
+			if (p->CardID == id)
+			{
+				p->Balance += money;
+			}
+			p = p->next;
+		}
+	}
+	WD.WriteDataFile(&user_HEAD);
 }
 void OperaData::ReadDataInfo(const long &id,float &balance)
 {
