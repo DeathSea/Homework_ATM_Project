@@ -31,7 +31,7 @@ public:
 	void UserBalance(long &id);//查询余额
 	void Withdrawal(long &id);//#取款
 	void Deposit(long &id);//#存款
-	void Transfer();//#转账
+	void Transfer(long &id);//#转账
 	void ChangeCode(); 
 };
 class Admin
