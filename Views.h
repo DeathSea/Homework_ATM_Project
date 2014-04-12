@@ -43,6 +43,7 @@ public:
 	void AdminName(string * in);//获取admin名
 	void Code(char * code);//获取密码
 	void Money(int &);//获取钱数
+	void Money(float &);
 	void FileName();//获取文件路径
 	void UserName();//获取用户名
 	bool Confirm();
