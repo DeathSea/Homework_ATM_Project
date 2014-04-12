@@ -157,3 +157,13 @@ void InputText::Money(int &input)
 	}
 	else{throw runtime_error("请输入正数!");}
 }
+void InputText::Money(float &money)
+{
+	float tmp;
+	cin >> tmp;
+	if(tmp > 0)
+	{
+		money = tmp;
+	}
+	else{throw runtime_error("请输入正数!");}
+}
