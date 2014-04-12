@@ -214,3 +214,16 @@ void ATM::Deposit(long &id)
 	OperaData.ChangDataInfo(id,money,1);
 	std::cout<<"已存入"<<money<<"元整"<<std::endl;
 }
+void ATM::Transfer(long &id)
+{
+    float money = 0;
+	long target_id = 0;
+	OutputText.Confirm("转账");
+	OutputText.Prompt("请输入对方卡号");
+	InputText.CardID(&target_id);
+	if(!OperaData.ReadDataInfo(target_id))
+	{
+
+	}
+	OutputText.Money();
+}
