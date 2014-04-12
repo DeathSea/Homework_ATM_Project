@@ -141,7 +141,7 @@ void OutputText::Confirm(const string O)
 }
 void OutputText::Money()
 {
-	OutputText::Prompt("请输入多少人民币（整百）：");
+	OutputText::Prompt("请输入多少人民币：");
 }
 void InputText::Money(int &input)
 {

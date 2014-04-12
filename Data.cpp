@@ -201,7 +201,7 @@ void OperaData::ChangDataInfo(long card_id,bool enable)
 	}
 	WD.WriteDataFile(&user_HEAD);
 }
-void OperaData::ChangDataInfo(long &id,int money,bool I_or_O)
+void OperaData::ChangDataInfo(long &id,float money,bool I_or_O)
 {
 	struct user_info *p;
 	p = &user_HEAD;
@@ -241,4 +241,35 @@ void OperaData::ReadDataInfo(const long &id,float &balance)
 		}
 		p = p->next;
 	}
+}
+void OperaData::ReadDataInfo(const long &id,string &name)
+{
+	struct user_info *p;
+	p = &user_HEAD;
+	while(p->next != NULL)
+	{
+		if (p->CardID == id)
+		{
+			name = p->user_name;
+		}
+		p = p->next;
+	}
+}
+void OperaData::ChangDataInfo(long &id,unsigned * sha1)
+{
+	struct user_info *p;
+	p = &user_HEAD;
+	while(p->next != NULL)
+	{
+		if (p->CardID == id)
+		{
+			p->code_sha1[0] = sha1[0];
+			p->code_sha1[1] = sha1[1];
+			p->code_sha1[2] = sha1[2];
+			p->code_sha1[3] = sha1[3];
+			p->code_sha1[4] = sha1[4];
+		}
+		p = p->next;
+	}
+	WD.WriteDataFile(&user_HEAD);
 }
