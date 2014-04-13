@@ -9,7 +9,8 @@ Designed by DeathSea 2014 Jnu
 #include <iostream>
 #include <fstream>
 #include <string>
-using std::string;using std::ifstream;using std::ofstream;
+#include <vector>
+using std::string;using std::ifstream;using std::ofstream;using std::vector;
 
 class InitData//初始化数据
 {
@@ -54,6 +55,7 @@ public:
 	bool ReadDataInfo(long card_id);//读取用户是否锁定
 	void ReadDataInfo(const long &id,float &balance);
 	void ReadDataInfo(const long &id,string &name);
+	void ReadDataInfo(vector<long> &id_list);
 	//void QueryDatabase();
 	void ChangDataInfo(long card_id,bool enable);//使用户账户禁用/可用
 	void ChangDataInfo(long &id,float money,bool I_or_O);//1为进（存），0为出（取）
