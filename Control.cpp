@@ -1,6 +1,5 @@
 #include "control.h"
 
-
 void Start::start()
 {
 	ATM ATM;Admin Admin;
@@ -368,4 +367,15 @@ void Admin::ChangeCode(long &id)
 	OperaData.ChangDataInfo(id,new_sha);
 	OutputText.Prompt("修改完成");
 	return;
+}
+void Admin::InquiryAllUserInfo()
+{
+	vector<long> id_list;
+	OperaData.ReadDataInfo(id_list);
+	auto list_size = id_list.size();
+	decltype(list_size) index = 0;
+	for(;index!=list_size-1;index++)
+	{
+		OutputText.UserInfo();
+	}
 }
