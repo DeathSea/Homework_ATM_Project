@@ -273,3 +273,12 @@ void OperaData::ChangDataInfo(long &id,unsigned * sha1)
 	}
 	WD.WriteDataFile(&user_HEAD);
 }
+void OperaData::ReadDataInfo(vector<long> &id_list)
+{
+	struct user_info *p = &user_HEAD;
+	while(p->next->next != NULL)
+	{
+		id_list.push_back(p->CardID);
+		p = p->next;
+	}
+}
