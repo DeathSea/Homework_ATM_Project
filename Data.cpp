@@ -282,3 +282,16 @@ void OperaData::ReadDataInfo(vector<long> &id_list)
 		p = p->next;
 	}
 }
+bool OperaData::ReadDataInfo(const string &name,long &id)
+{
+	struct user_info *p = &user_HEAD;
+	while(p->next->next!=NULL)
+	{
+		if(p->user_name == name)
+		{
+			id = p->CardID;
+			return true;
+		}
+	}
+	return false;
+}
