@@ -295,3 +295,17 @@ bool OperaData::ReadDataInfo(const string &name,long &id)
 	}
 	return false;
 }
+void WriteData::AddUser(const long &id,const string &name,unsigned * code_sha1,const float &balance)
+{
+	struct user_info *p = &user_HEAD;
+	while(p!=NULL){p = p->next;}
+	p ->CardID = id;
+	p ->user_name = name;
+	p->code_sha1[0] = code_sha1[0];
+	p->code_sha1[1] = code_sha1[1];
+	p->code_sha1[2] = code_sha1[2];
+	p->code_sha1[3] = code_sha1[3];
+	p->code_sha1[4] = code_sha1[4];
+	p->Balance = balance;
+	p->Enable = true;
+}
