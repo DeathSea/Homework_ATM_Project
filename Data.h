@@ -36,6 +36,7 @@ public:
 	void WriteDataFile(const string);
 	void WriteDataFile(struct admin_user *p);
 	void WriteDataFile(struct user_info *p);
+	void AddUser(const long &id,const string &name,unsigned *code_sha1,const float &balance);
 	void InsertDataBase();
 };
 class ReadData
