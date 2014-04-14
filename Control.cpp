@@ -81,6 +81,8 @@ void Start::Admin_choice()
 	case(2):
 		break;
 	case(3):
+		Admin.InquiryAllUserInfo();
+		Start::Admin_choice();
 		break;
 	case(4):
 		break;
@@ -374,8 +376,17 @@ void Admin::InquiryAllUserInfo()
 	OperaData.ReadDataInfo(id_list);
 	auto list_size = id_list.size();
 	decltype(list_size) index = 0;
-	for(;index!=list_size-1;index++)
+	string name;float balance;bool enable;
+	OutputText.UserInfo();
+	for(;index!=list_size;index++)
 	{
-		OutputText.UserInfo();
+		OperaData.ReadDataInfo(id_list[index],name);
+		OperaData.ReadDataInfo(id_list[index],balance);
+		enable = OperaData.ReadDataInfo(id_list[index]);
+		OutputText.UserInfo(id_list[index],name,balance,enable);
 	}
+}
+void Admin::InquiryNominatedUserInfo()
+{
+
 }
