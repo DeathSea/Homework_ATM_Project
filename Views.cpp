@@ -1,4 +1,5 @@
 #include "Views.h"
+#include <iomanip>
 using namespace std;
 OutputText::OutputText()
 {
@@ -169,5 +170,11 @@ void InputText::Money(float &money)
 }
 void OutputText::UserInfo()
 {
-
+	OutputText::Prompt("用户id    用户名    余额        账号状态");
+}
+void OutputText::UserInfo(const long &id,const string &name,const float &balance,const bool &Enable)
+{
+	string sp(10-name.size(),' ');
+	cout << left;
+	cout << setw(10)<< id << setw(10) << name << showpoint <<balance << "     " << (Enable?"正常使用":"已被禁用") << endl;
 }
