@@ -75,6 +75,8 @@ void Start::Admin_choice()
 	switch(Choice)
 	{
 	case(0):
+		Admin.AddUser();
+		Start::Admin_choice();
 		break;
 	case(1):
 		break;
@@ -421,4 +423,44 @@ void Admin::InquiryNominatedUserInfo()
 	OutputText.UserInfo();
 	OutputText.UserInfo(id,name,balance,enable);
 	return;
+}
+void Admin::AddUser()
+{
+	WriteData WriteData;
+	vector<long> id_list;
+	OperaData.ReadDataInfo(id_list);
+	auto last_id = id_list[id_list.size()-1];
+	OutputText.Confirm("添加用户");
+	long id;
+	string name;
+	char first_input_code[255] = {'\0'},second_input_code[255] = {'\0'};
+	unsigned code_sha1[5];
+	float balance;
+	if(InputText.Confirm())
+	{
+		OutputText.Prompt("提示：最后一位id为：");
+		std::cout << last_id << std::endl;
+		OutputText.CardID();
+		InputText.CardID(&id);
+		OutputText.UserName();
+		InputText.AdminName(&name);
+		OutputText.Code();
+		InputText.Code(first_input_code);
+		OutputText.Prompt("请再次输入密码以确认");
+		InputText.Code(second_input_code);
+		for(int i=0;first_input_code[i]!='\0';i++)
+		{
+			if(first_input_code[i]!=second_input_code[i])
+			{
+				OutputText.Prompt("两次密码不相同！");
+				return;
+			}
+		}
+		helper.calculate(first_input_code,code_sha1);
+		OutputText.Prompt("预存款为50确认吗？(Y/N):");
+		if(InputText.Confirm()){balance = 50;}
+		else{OutputText.Money();try{InputText.Money(balance);}catch(std::runtime_error err){std::cout << err.what() << std::endl;return;}}
+		WriteData.AddUser(id,name,code_sha1,balance);
+	}
+	else{return ;}
 }
