@@ -24,6 +24,9 @@ OutputText::OutputText()
 	AdminMenu[6] = "用户存款";
 	AdminMenu[7] = "用户修改密码";
 	AdminMenu[8] = "退出";
+	//初始化读取用户方法菜单
+	UserInfoMethod[0] = "id";
+	UserInfoMethod[1] = "用户名";
 }
 void OutputText::Prompt(const string pro)
 {
@@ -52,6 +55,9 @@ unsigned int OutputText::Menu(int Menu_Option)
 		Menu = AdminMenu;
 		array_length = 9;
 		break;
+	case(3):
+		Menu = UserInfoMethod;
+		array_length = 2;
 	default:
 		break;
 	}
@@ -116,6 +122,10 @@ void InputText::Code(char * code)
 void OutputText::AdminName(void)
 {
 	OutputText::Prompt("请输入后台用户名");
+}
+void OutputText::UserName()
+{
+	OutputText::Prompt("请输入用户名");
 }
 void InputText::AdminName(string * in)
 {
