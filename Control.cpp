@@ -85,6 +85,8 @@ void Start::Admin_choice()
 		Start::Admin_choice();
 		break;
 	case(4):
+		Admin.InquiryNominatedUserInfo();
+		Start::Admin_choice();
 		break;
 	case(5):
 		if(Admin.GetID(id))
@@ -388,5 +390,35 @@ void Admin::InquiryAllUserInfo()
 }
 void Admin::InquiryNominatedUserInfo()
 {
-
+	int Choice = 0,length = OutputText.Menu(3);
+	long id = 0;float balance;bool enable;
+	string name;
+	Choice = InputText.Choice(length);
+	if (Choice == 0)//id方法
+	{
+		unsigned sha1[5];
+		OutputText.CardID();
+		InputText.CardID(&id);
+		if(!OperaData.ReadDataInfo(id,sha1))
+		{
+			OutputText.Prompt("ID不存在！请确认！");
+			return;
+		}
+	}
+	else//用户名方式
+	{
+		OutputText.UserName();
+		InputText.AdminName(&name);
+		if(!OperaData.ReadDataInfo(name,id))
+		{
+			OutputText.Prompt("用户名不存在！请确认！");
+			return;
+		};
+	}
+	OperaData.ReadDataInfo(id,name);
+	OperaData.ReadDataInfo(id,balance);
+	enable = OperaData.ReadDataInfo(id);
+	OutputText.UserInfo();
+	OutputText.UserInfo(id,name,balance,enable);
+	return;
 }
