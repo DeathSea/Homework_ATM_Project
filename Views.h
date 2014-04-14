@@ -31,7 +31,8 @@ public:
 	void ChangeCode();//打印修改密码的提示
 	void AdminName();//打印输入admin名的信息
 	void AddUser();//打印增加用户的信息
-	void UserInfo();//打印用户信息
+	void UserInfo(const long &id,const string &name,const float &balance,const bool &Enable);//打印用户信息
+	void UserInfo();
 };
 class InputText
 {
