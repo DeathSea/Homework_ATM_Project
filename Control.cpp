@@ -263,7 +263,7 @@ void ATM::Deposit(long &id,bool Admin_or_not)
 	OutputText.Money();
 	try
 	{
-		if(!Admin_or_not){int m = (int)money;InputText.Money(m);}
+		if(!Admin_or_not){int m = (int)money;InputText.Money(m);money = (float)m;}
 		else{InputText.Money(money);}
 	}
 	catch(std::runtime_error err)
