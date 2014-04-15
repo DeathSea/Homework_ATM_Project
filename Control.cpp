@@ -459,8 +459,24 @@ void Admin::AddUser()
 		helper.calculate(first_input_code,code_sha1);
 		OutputText.Prompt("预存款为50确认吗？(Y/N):");
 		if(InputText.Confirm()){balance = 50;}
-		else{OutputText.Money();try{InputText.Money(balance);}catch(std::runtime_error err){std::cout << err.what() << std::endl;return;}}
+		else
+		{
+			while(1)
+			{
+				OutputText.Money();
+				try{
+					InputText.Money(balance);
+				}
+				catch(std::runtime_error err)
+				{
+					std::cout << err.what() << std::endl;
+					continue;
+				}
+				break;
+			}
+		}
 		WriteData.AddUser(id,name,code_sha1,balance);
+		OutputText.Prompt("添加成功！");
 	}
 	else{return ;}
 }
