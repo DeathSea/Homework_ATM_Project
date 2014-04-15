@@ -84,7 +84,7 @@ void WriteData::WriteDataFile(struct user_info *p)
 	ofstream tp_file("user_database.txt");
 	if(tp_file)
 	{
-		while (p->next->next !=NULL)
+		while (p->next !=NULL)
 		{
 			tp_file << p->CardID
 			<< " " << p->user_name 
@@ -103,6 +103,7 @@ void WriteData::WriteDataFile(struct user_info *p)
 }
 void ReadData::ReadDataFile(ifstream &File,struct user_info * p)
 {
+	p->next = NULL;
 	if (File)
 	{
 		while(!File.eof())
@@ -116,6 +117,7 @@ void ReadData::ReadDataFile(ifstream &File,struct user_info * p)
 			>> p->code_sha1[4] 
 			>> p->Balance 
 			>> p->Enable;
+			if(File.eof()){break;}
             p->next = new struct user_info;
 			p = p->next;
 			p->next = NULL;
@@ -276,7 +278,7 @@ void OperaData::ChangDataInfo(long &id,unsigned * sha1)
 void OperaData::ReadDataInfo(vector<long> &id_list)
 {
 	struct user_info *p = &user_HEAD;
-	while(p->next->next != NULL)
+	while(p->next != NULL)
 	{
 		id_list.push_back(p->CardID);
 		p = p->next;
@@ -285,20 +287,21 @@ void OperaData::ReadDataInfo(vector<long> &id_list)
 bool OperaData::ReadDataInfo(const string &name,long &id)
 {
 	struct user_info *p = &user_HEAD;
-	while(p->next->next!=NULL)
+	while(p->next!=NULL)
 	{
 		if(p->user_name == name)
 		{
 			id = p->CardID;
 			return true;
 		}
+		p=p->next;
 	}
 	return false;
 }
 void WriteData::AddUser(const long &id,const string &name,unsigned * code_sha1,const float &balance)
 {
 	struct user_info *p = &user_HEAD;
-	while(p!=NULL){p = p->next;}
+	while(p->next!=NULL){p = p->next;}
 	p ->CardID = id;
 	p ->user_name = name;
 	p->code_sha1[0] = code_sha1[0];
@@ -308,4 +311,7 @@ void WriteData::AddUser(const long &id,const string &name,unsigned * code_sha1,c
 	p->code_sha1[4] = code_sha1[4];
 	p->Balance = balance;
 	p->Enable = true;
+	p->next = new struct user_info;
+	p->next->next = NULL;
+	WriteData::WriteDataFile(&user_HEAD);
 }
