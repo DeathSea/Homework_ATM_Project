@@ -31,3 +31,7 @@ void helper::calculate(const char * input_char_array,unsigned * input_sha1)
 		std::cout<<"Can't not calculate the sha1 value"<<std::endl;
 	}
 }
+bool helper::checkfilename(const string &filename)
+{
+	
+}
