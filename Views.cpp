@@ -188,3 +188,8 @@ void OutputText::UserInfo(const long &id,const string &name,const float &balance
 	cout << left;
 	cout << setw(10)<< id << setw(10) << name << showpoint <<balance << "     " << (Enable?"正常使用":"已被禁用") << endl;
 }
+void InputText::FileName(string &filename)
+{
+	string tmpfile_name;
+     //cin >> filename;
+}
