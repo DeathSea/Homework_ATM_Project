@@ -79,6 +79,7 @@ void Start::Admin_choice()
 		Start::Admin_choice();
 		break;
 	case(1):
+	     Admin.ExportUser();
 		break;
 	case(2):
 		break;
@@ -479,4 +480,8 @@ void Admin::AddUser()
 		OutputText.Prompt("添加成功！");
 	}
 	else{return ;}
+}
+void Admin::ExportUser()
+{
+	
 }
