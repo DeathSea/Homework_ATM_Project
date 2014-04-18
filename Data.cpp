@@ -318,7 +318,7 @@ void WriteData::AddUser(const long &id,const string &name,unsigned * code_sha1,c
 void ExportData::WriteDataFile(const string &filename)
 {
 	struct user_info *p = &user_HEAD;
-	ofstream tp_file(filename);
+	ifstream tp_file(filename);
 	if(tp_file)
 	{
 		while (p->next !=NULL)
