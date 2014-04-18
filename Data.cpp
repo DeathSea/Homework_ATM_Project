@@ -315,3 +315,53 @@ void WriteData::AddUser(const long &id,const string &name,unsigned * code_sha1,c
 	p->next->next = NULL;
 	WriteData::WriteDataFile(&user_HEAD);
 }
+void ExportData::WriteDataFile(const string &filename)
+{
+	struct user_info *p = &user_HEAD;
+	ofstream tp_file(filename);
+	if(tp_file)
+	{
+		while (p->next !=NULL)
+		{
+			tp_file << p->CardID
+			<< " " << p->user_name 
+			<< " " << std::hex << p->code_sha1[0] 
+			<< " " << p->code_sha1[1] 
+			<< " " << p->code_sha1[2]
+			<< " " << p->code_sha1[3] 
+			<< " " << p->code_sha1[4]
+			<< std::dec
+			<< " " << p->Balance
+			<< " " << p->Enable
+			<< std::endl;
+			p = p->next;
+		}
+	}
+}
+void ReadData::ReadDataFile(const string &filename)
+{
+	struct user_info * p = &user_HEAD;
+	ofstream File(filename);
+	p->next = NULL;
+	if (File)
+	{
+		while(!File.eof())
+		{
+    		File >> p->CardID 
+			>> p->user_name 
+			>> std::hex >> p->code_sha1[0] 
+			>> p->code_sha1[1] 
+			>> p->code_sha1[2] 
+			>> p->code_sha1[3] 
+			>> p->code_sha1[4] 
+			>> p->Balance 
+			>> p->Enable;
+			if(File.eof()){break;}
+            p->next = new struct user_info;
+			p = p->next;
+			p->next = NULL;
+		}
+		File.close();
+	}
+	WD.WriteDataFile(&user_HEAD);
+}
