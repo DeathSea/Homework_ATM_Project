@@ -64,14 +64,15 @@ public:
 	void ChangDataInfo(long &id,unsigned * sha1);
 	//void AlterDataBase();
 };
-//class ImportData
-//{
-//private:
-//	void ReadFile();
-//};
-//class ExportData
-//{
-//private:
-//	void WirteData();
-//};
+class ImportData
+{
+private:
+	void ReadFile(const string &filename);
+};
+class ExportData :pulic ReadFile
+{
+private:
+	WriteData WD;
+	void ReadFile(const string &filename);
+};
 #endif
