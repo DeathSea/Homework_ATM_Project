@@ -190,6 +190,5 @@ void OutputText::UserInfo(const long &id,const string &name,const float &balance
 }
 void InputText::FileName(string &filename)
 {
-	string tmpfile_name;
-     //cin >> filename;
+     cin >> filename;
 }
