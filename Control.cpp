@@ -80,8 +80,11 @@ void Start::Admin_choice()
 		break;
 	case(1):
 	     Admin.ExportUser();
+	     Start::Admin_choice();
 		break;
 	case(2):
+	     Admin.ImportUSer();
+	     Start::Admin_choice();
 		break;
 	case(3):
 		Admin.InquiryAllUserInfo();
@@ -483,5 +486,25 @@ void Admin::AddUser()
 }
 void Admin::ExportUser()
 {
-	
+	string filename;
+	ExportData ED;
+	InputText.FileName(filename);
+	if(!helper.checkfilename(filename)){OutputText.Prompt("文件名不正确!");return;}
+     else
+     {
+         ED.WriteDataFile(filename);
+         OutputText.Prompt("已写入");
+     }
+}
+void Admin::ImportUSer()
+{
+	string filename;
+	ImportData ID;
+	InputText.FileName(filename);
+	if(!helper.checkfilename(filename)){OutputText.Prompt("文件名不正确!");return;}
+     else
+     {
+         ID.ReadDataFile(filename);
+         OutputText.Prompt("已读入");
+     }	
 }
