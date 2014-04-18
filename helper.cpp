@@ -33,5 +33,9 @@ void helper::calculate(const char * input_char_array,unsigned * input_sha1)
 }
 bool helper::checkfilename(const string &filename)
 {
-	
+	if (filename.find("/") !=-1 || filename.find("\\") !=-1)
+	{
+		return true;
+	}
+     return false;
 }
