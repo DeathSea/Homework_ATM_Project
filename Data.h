@@ -66,13 +66,14 @@ public:
 };
 class ImportData
 {
-private:
-	void ReadFile(const string &filename);
+public:
+	bool ReadDataFile(const string &filename);
 };
-class ExportData :pulic ReadFile
+class ExportData //:public ReadFile
 {
 private:
 	WriteData WD;
-	void ReadFile(const string &filename);
+public:
+	bool WriteDataFile(const string &filename);
 };
 #endif
