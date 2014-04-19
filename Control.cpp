@@ -2,6 +2,7 @@
 
 void Start::start()
 {
+	system("cls");
 	ATM ATM;Admin Admin;
 	enum Menu {MainMenu,ATMMenu,AdminMenu};
 	unsigned int Menu_length = 0;
@@ -25,10 +26,12 @@ void Start::start()
 	}
 	if(ATM_login)
 	{
+    	system("cls");
 		Start::ATM_choice(id);
 	}
 	if(admin_login)
 	{
+    	system("cls");
 		Start::Admin_choice();
 	}
 }
@@ -83,7 +86,7 @@ void Start::Admin_choice()
 	     Start::Admin_choice();
 		break;
 	case(2):
-	     Admin.ImportUSer();
+	     Admin.ImportUser();
 	     Start::Admin_choice();
 		break;
 	case(3):
@@ -488,23 +491,27 @@ void Admin::ExportUser()
 {
 	string filename;
 	ExportData ED;
+	OutputText.Prompt("请输入文件名");
 	InputText.FileName(filename);
 	if(!helper.checkfilename(filename)){OutputText.Prompt("文件名不正确!");return;}
      else
      {
-         ED.WriteDataFile(filename);
-         OutputText.Prompt("已写入");
+         if(ED.WriteDataFile(filename)){
+         OutputText.Prompt("已写入");}
+		 else{OutputText.Prompt("写入出错");}
      }
 }
-void Admin::ImportUSer()
+void Admin::ImportUser()
 {
 	string filename;
 	ImportData ID;
+	OutputText.Prompt("请输入文件名");
 	InputText.FileName(filename);
 	if(!helper.checkfilename(filename)){OutputText.Prompt("文件名不正确!");return;}
      else
      {
-         ID.ReadDataFile(filename);
-         OutputText.Prompt("已读入");
+         if(ID.ReadDataFile(filename))
+         {OutputText.Prompt("已读入");}
+		 else{OutputText.Prompt("读入出错");}
      }	
 }
