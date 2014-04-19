@@ -315,10 +315,10 @@ void WriteData::AddUser(const long &id,const string &name,unsigned * code_sha1,c
 	p->next->next = NULL;
 	WriteData::WriteDataFile(&user_HEAD);
 }
-void ExportData::WriteDataFile(const string &filename)
+bool ExportData::WriteDataFile(const string &filename)
 {
 	struct user_info *p = &user_HEAD;
-	ifstream tp_file(filename);
+	ofstream tp_file(filename);
 	if(tp_file)
 	{
 		while (p->next !=NULL)
@@ -336,12 +336,14 @@ void ExportData::WriteDataFile(const string &filename)
 			<< std::endl;
 			p = p->next;
 		}
+		return true;
 	}
+	return false;
 }
-void ReadData::ReadDataFile(const string &filename)
+bool ImportData::ReadDataFile(const string &filename)
 {
 	struct user_info * p = &user_HEAD;
-	ofstream File(filename);
+	ifstream File(filename);
 	p->next = NULL;
 	if (File)
 	{
@@ -362,6 +364,8 @@ void ReadData::ReadDataFile(const string &filename)
 			p->next = NULL;
 		}
 		File.close();
+    	WD.WriteDataFile(&user_HEAD);
+    	return true;
 	}
-	WD.WriteDataFile(&user_HEAD);
+	return false;
 }
