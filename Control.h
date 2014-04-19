@@ -43,7 +43,7 @@ class Admin:public ATM
 public:
 	bool Login();
 	void AddUser();
-	void EXportUser();
+	void ExportUser();
 	void ImportUser();
 	void InquiryAllUserInfo();
 	void InquiryNominatedUserInfo();
